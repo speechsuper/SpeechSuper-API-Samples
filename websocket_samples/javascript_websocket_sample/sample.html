@@ -1,0 +1,155 @@
+<script type="text/javascript" src="sha.js"></script>
+<h2>-----------javascript websocket sample-----------</h2>
+<form action="" method="post" enctype="multipart/form-data" id="form" name="form_en">
+<pre>
+refText: supermarket
+</pre>
+<input type="file" name="audio" id="picpath" style="display:none" onChange="fileChange(event)">
+<input name="path" readonly placeholder="Please choose supermarket.wav" style="width:350px"> 
+<input type="button" value="Browse" onclick="document.form_en.picpath.click()">
+<pre>
+<input type="button" value="Submit" id ="btn" style="margin-left: 56px;">
+</pre>
+</form>
+
+<script>
+	var appKey = "Insert your appKey here";
+	var secretKey = "Insert your secretKey here";
+	var userId = "guest";
+	var refText = "supermarket";
+	var audioType = "wav";
+	var audioSampleRate = 16000;
+	var coreType = "word.eval";
+	var audio = null;
+	
+	function fileChange(e) {
+		document.form_en.path.value = e.target.files[0].name;
+
+		var reader = new FileReader();
+		reader.onload = (function(file) {
+			return function(e) {
+				audio = this.result;
+			}
+		})(e.target.files[0])
+		reader.readAsArrayBuffer(e.target.files[0]);	
+	}
+
+	function wsAPI(appKey, secretKey, audio, audioType, request, cb) {
+		var baseUrl = "wss://api.speechsuper.com/";
+		var wsBuffer = [];
+
+		var createUUID = (function (uuidRegEx, uuidReplacer) {
+			return function () {
+				return "xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx".replace(uuidRegEx, uuidReplacer).toUpperCase();
+			};
+		})(/[xy]/g, function (c) {
+			var r = Math.random() * 16 | 0,
+				v = c == "x" ? r : (r & 3 | 8);
+			return v.toString(16);
+		});
+		
+		var createParam = function (type) {
+			var params = {};
+			//request param
+			var timestamp = (new Date).getTime().toString();
+			var userId = createUUID();
+			if(type === 0) {
+				params = {
+					cmd: "connect",
+					param: {
+						sdk: {
+							version: 16777472,
+							source: 4,
+							protocol: 1
+						},
+						app: {
+							applicationId: appKey,
+							sig: (new jsSHA(appKey + timestamp + secretKey, "TEXT")).getHash("SHA-1", "HEX"),
+							timestamp: timestamp
+						}
+					}
+				}
+			} else {
+				params = {
+					cmd: "start",
+					param: {
+						app: {
+							applicationId: appKey,
+							sig: (new jsSHA(appKey + timestamp + userId + secretKey, "TEXT")).getHash("SHA-1", "HEX"),
+							userId: userId,
+							timestamp: timestamp
+						},
+						audio: {
+							audioType: audioType,
+							sampleRate: audioSampleRate,
+							channel: 1,
+							sampleBytes: 2
+						},
+						request: request
+					}
+				};
+				params.param.request.tokenId = createUUID()
+			}
+			return params;
+		};
+
+		var websocket = null;
+		var connectWebsocket = function () {
+			websocket = new WebSocket(baseUrl + request.coreType);
+			websocket.onopen = function (n) {
+				console.log("Opened connection to websocket");
+				var connectParam = JSON.stringify(createParam(0));
+				websocket.send(connectParam);
+				for (var i = 0; i < wsBuffer.length; i++)
+					websocket.send(wsBuffer[i]);
+				wsBuffer.length = 0
+			};
+			websocket.onclose = function () {
+				console.log("Close connection to websocket")
+			};
+			websocket.onmessage = function (msg) {
+				cb(msg.data);
+			};
+			websocket.onerror = function (n) {
+				console.log(n.data);
+			}
+		};
+
+		connectWebsocket();
+		var startParam = JSON.stringify(createParam(1));
+		var stopParam = '{"cmd":"stop"}';
+		if(websocket && websocket.readyState == WebSocket.OPEN) {
+			websocket.send(startParam);
+			websocket.send(audio);
+			websocket.send(stopParam);
+		} else {
+			wsBuffer.push(startParam);
+			wsBuffer.push(audio);
+			wsBuffer.push(stopParam);
+		}
+	};
+
+	var btn = document.getElementById("btn");
+
+	btn.onclick = function () {
+		if(audio == null) {
+			alert("Please choose supermarket.wav");
+			return;
+		}
+		var cb = function(msg) {
+			var resultObj = JSON.parse(msg);
+			if(resultObj.hasOwnProperty("error")) {
+				alert(msg)
+			} else {
+				alert("overall: " + resultObj.result.overall);
+			}
+		};
+		var request = {
+			coreType: coreType,
+			refText: refText
+		};
+		wsAPI(appKey, secretKey, audio, audioType, request, cb);
+		
+		return false;
+	};
+</script>

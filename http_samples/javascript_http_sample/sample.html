@@ -1,0 +1,102 @@
+<script type="text/javascript" src="sha.js"></script>
+<h2>-----------javascript http sample-----------</h2>
+<form action="" method="post" enctype="multipart/form-data" id="form" name="form_en">
+<pre>
+refText: supermarket
+</pre>
+<input type="file" name="audio" id="picpath" style="display:none" onChange="document.form_en.path.value=this.value">
+<input name="path" readonly placeholder="Please choose supermarket.wav" style="width:350px"> 
+<input type="button" value="Browse" onclick="document.form_en.picpath.click()">
+<pre>
+<input type="submit" value="Submit" id ="btn" style="margin-left: 56px;">
+</pre>
+</form>
+
+<script>
+	var appKey = "Insert your appKey here";
+	var secretKey = "Insert your secretKey here";
+	var userId = "guest";
+	var refText = "supermarket";
+	var audioType = "wav";
+	var sampleRate = 16000;
+	var baseUrl = "https://api.speechsuper.com/";
+	var coreType = "word.eval";
+	var getConnectSig = function () {
+		var timestamp = new Date().getTime().toString();
+		var sig = new jsSHA(appKey + timestamp + secretKey, 'TEXT').getHash("SHA-1", "HEX");
+		return { sig: sig, timestamp: timestamp };
+	}
+	var getStartSig = function () {
+		var timestamp = new Date().getTime().toString();
+		var sig = new jsSHA(appKey + timestamp + userId + secretKey, 'TEXT').getHash("SHA-1", "HEX");
+		return { sig: sig, timestamp: timestamp, userId: userId };
+	}
+	var createUUID = (function (uuidRegEx, uuidReplacer) {
+		return function () {
+			return "xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx".replace(uuidRegEx, uuidReplacer).toUpperCase();
+		};
+	})(/[xy]/g, function (c) {
+		var r = Math.random() * 16 | 0,
+			v = c == "x" ? r : (r & 3 | 8);
+		return v.toString(16);
+	});
+	var connectSig = getConnectSig();
+	var startSig = getStartSig();
+	var params = {
+		connect: {
+			cmd: "connect",
+			param: {
+				sdk: {
+					version: 16777472,
+					source: 9,
+					protocol: 2
+				},
+				app: {
+					applicationId: appKey,
+					sig: connectSig.sig,
+					timestamp: connectSig.timestamp
+				}
+			}
+		},
+		start: {
+			cmd: "start",
+			param: {
+				app: {
+					applicationId: appKey,
+					sig: startSig.sig,
+					userId: startSig.userId,
+					timestamp: startSig.timestamp
+				},
+				audio: {
+					audioType: audioType,
+					sampleRate: sampleRate,
+					channel: 1,
+					sampleBytes: 2
+				},
+				request: {
+					coreType: coreType,
+					refText: refText,
+					tokenId: createUUID()
+				}
+			}
+		}
+	};
+	var btn = document.getElementById("btn");
+	btn.onclick = function () {
+		var fd = new FormData(document.getElementById("form"));
+		fd.append("text", JSON.stringify(params));
+		var xhr = new XMLHttpRequest();
+		xhr.open("post", baseUrl + coreType);
+		xhr.setRequestHeader("Request-Index", "0");
+		xhr.send(fd);
+		var t1, t2;
+		t1 = Math.round(new Date().getTime() / 1000);
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				t2 = Math.round(new Date().getTime() / 1000);
+				alert(xhr.responseText);
+			}
+		};
+		return false;
+	};
+</script>

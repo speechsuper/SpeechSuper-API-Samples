@@ -1,0 +1,31 @@
+# vscode
+.vs/
+
+.DS_Store
+
+# .idea
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Golang
+**/golang*/**/pkg/
+**/golang*/**/go.sum
+
+# C#
+**/csharp*/**/packages/
+**/csharp*/**/obj/
+**/csharp*/**/*.dll
+**/csharp*/**/*.exe
+**/csharp*/**/*.xml
+**/csharp*/**/*.exe.config
+**/csharp*/**/*.pdb
+
+# Java
+**/java*/**/.settings
+**/java*/**/.bin
+**/java*/**/target
+**/java*/**/.classpath
+**/java*/**/.project

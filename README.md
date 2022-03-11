@@ -13,10 +13,11 @@ Some more prominent features are listed below:
 * **Platforms supported:** iOS, Android, Web, Windows, MacOS, Linux etc.
 
 ## Flowchart
+![](./images/Flowchart.jpg)
 
 ## Demo
 
 Find demos [here](https://www.speechsuper.com/demo/english/index.html)
 
 ## Support
-Contact xxx@ for technical support.
+Contact support@speechsuper.com for technical support.
