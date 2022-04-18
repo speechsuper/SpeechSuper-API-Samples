@@ -16,8 +16,9 @@ Some more prominent features are listed below:
 1. Get your appKey and secretKey. (这里可以说明如何获取)
 
 2. Git clone this project to your local
-
+```
 git clone https://github.com/speechsuper/speechsuper-api-samples.git
+```
 
 3. Choose the example of your interest. We have [http](https://github.com/speechsuper/speechsuper-api-samples/tree/main/http_samples) / [websocket](https://github.com/speechsuper/speechsuper-api-samples/tree/main/websocket_samples) samples in numerous coding languages. Fill in your appKey and secretKey: 
 ``` 
