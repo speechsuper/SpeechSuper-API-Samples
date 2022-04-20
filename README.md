@@ -8,7 +8,7 @@ SpeechSuper analyzes learner's audios and returns results covering various aspec
 - rhythm score
 
 <details>
-  <summary>Click to know more advaned features and info.</summary>
+  <summary>Click to know more advanced features and info.</summary>
   
 - syllable stress
 - liaison
