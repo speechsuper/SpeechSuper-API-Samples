@@ -31,17 +31,17 @@ func main() {
 	appKey := "Insert your appKey here"
 	secretKey := "Insert your secretKey here"
 
-	userId := "guest"
+	baseURL := "wss://api.speechsuper.com/"
 
-	coreType := "word.eval"
-	refText := "supermarket"
-	audioPath := "supermarket.wav"
-	audioType := "wav"
+	coreType := "word.eval" // Change the coreType according to your needs.
+	refText := "supermarket" // Change the reference text according to your needs.
+	audioPath := "supermarket.wav" // Change the audio path corresponding to the reference text.
+	audioType := "wav" // Change the audio type corresponding to the audio file.
 	audioSampleRate := "16000"
+	userId := "guest" // Required and customizable. This value is required when generating startSig
 
     //create connect
-	url := "wss://api.speechsuper.com/" + coreType
-
+	url := baseURL + coreType
 	wsClient, _, err := websocket.DefaultDialer.Dial(url, nil)
 	if err != nil {
 		log.Fatal("dial:", err)

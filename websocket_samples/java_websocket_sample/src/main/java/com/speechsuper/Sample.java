@@ -112,10 +112,10 @@ public class Sample {
     }
 
     public static void main(String[] args) {
-        String coreType = "word.eval";
-        String refText = "supermarket";
-        String audioPath = "supermarket.wav";
-        String audioType = "wav";
+        String coreType = "word.eval"; // Change the coreType according to your needs.
+        String refText = "supermarket"; // Change the reference text according to your needs.
+        String audioPath = "supermarket.wav"; // Change the audio path corresponding to the reference text.
+        String audioType = "wav"; // Change the audio type corresponding to the audio file.
         String audioSampleRate = "16000";
         
         WebsocketAPI(audioPath, audioType, audioSampleRate, refText, coreType);

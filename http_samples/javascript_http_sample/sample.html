@@ -13,14 +13,19 @@ refText: supermarket
 </form>
 
 <script>
+	var baseUrl = "https://api.speechsuper.com/";
+
 	var appKey = "Insert your appKey here";
 	var secretKey = "Insert your secretKey here";
-	var userId = "guest";
-	var refText = "supermarket";
-	var audioType = "wav";
+	
+	var coreType = "word.eval"; // Change the coreType according to your needs.
+	var refText = "supermarket"; // Change the reference text according to your needs.
+	var audioType = "wav"; // Change the audio type corresponding to the audio file.
 	var sampleRate = 16000;
-	var baseUrl = "https://api.speechsuper.com/";
-	var coreType = "word.eval";
+	var userId = "guest";
+
+	var url = baseUrl + coreType;
+	
 	var getConnectSig = function () {
 		var timestamp = new Date().getTime().toString();
 		var sig = new jsSHA(appKey + timestamp + secretKey, 'TEXT').getHash("SHA-1", "HEX");
@@ -86,7 +91,7 @@ refText: supermarket
 		var fd = new FormData(document.getElementById("form"));
 		fd.append("text", JSON.stringify(params));
 		var xhr = new XMLHttpRequest();
-		xhr.open("post", baseUrl + coreType);
+		xhr.open("post", url);
 		xhr.setRequestHeader("Request-Index", "0");
 		xhr.send(fd);
 		var t1, t2;

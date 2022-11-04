@@ -7,20 +7,22 @@ import json
 appKey = "Insert your appKey here"
 secretKey = "Insert your secretKey here"
 
+baseURL = "https://api.speechsuper.com/"
+
 timestamp = str(int(time.time()))
 
-coreType = "word.eval"
-url = "https://api.speechsuper.com/"+coreType
-
-refText = "supermarket"
-audioPath = "supermarket.wav"
-audioType = "wav"
+coreType = "word.eval" # Change the coreType according to your needs.
+refText = "supermarket" # Change the reference text according to your needs.
+audioPath = "supermarket.wav" # Change the audio path corresponding to the reference text.
+audioType = "wav" # Change the audio type corresponding to the audio file.
 audioSampleRate = 16000
 userId = "guest"
-connectstr=(appKey + timestamp + secretKey).encode("utf-8")
-connectsig=hashlib.sha1(connectstr).hexdigest()
-startstr=(appKey + timestamp + userId + secretKey).encode("utf-8")
-startsig=hashlib.sha1(startstr).hexdigest()
+
+url =  baseURL + coreType
+connectStr = (appKey + timestamp + secretKey).encode("utf-8")
+connectSig = hashlib.sha1(connectStr).hexdigest()
+startStr = (appKey + timestamp + userId + secretKey).encode("utf-8")
+startSig = hashlib.sha1(startStr).hexdigest()
 
 params={
 	"connect":{
@@ -33,7 +35,7 @@ params={
 			},
 			"app":{
 				"applicationId":appKey,
-				"sig":connectsig,
+				"sig":connectSig,
 				"timestamp":timestamp
 			}
 		}
@@ -45,7 +47,7 @@ params={
 				"userId":userId,
 				"applicationId":appKey,
 				"timestamp":timestamp,
-				"sig":startsig
+				"sig":startSig
 			},
 			"audio":{
 				"audioType":audioType,

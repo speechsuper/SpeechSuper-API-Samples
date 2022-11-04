@@ -15,11 +15,13 @@ refText: supermarket
 <script>
 	var appKey = "Insert your appKey here";
 	var secretKey = "Insert your secretKey here";
-	var userId = "guest";
-	var refText = "supermarket";
-	var audioType = "wav";
+
+	var coreType = "word.eval"; // Change the coreType according to your needs.
+	var refText = "supermarket"; // Change the reference text according to your needs.
+	var audioType = "wav"; // Change the audio type corresponding to the audio file.
 	var audioSampleRate = 16000;
-	var coreType = "word.eval";
+	var userId = "guest";
+	
 	var audio = null;
 	
 	function fileChange(e) {
@@ -36,6 +38,7 @@ refText: supermarket
 
 	function wsAPI(appKey, secretKey, audio, audioType, request, cb) {
 		var baseUrl = "wss://api.speechsuper.com/";
+		var url = baseUrl + request.coreType;
 		var wsBuffer = [];
 
 		var createUUID = (function (uuidRegEx, uuidReplacer) {
@@ -95,7 +98,7 @@ refText: supermarket
 
 		var websocket = null;
 		var connectWebsocket = function () {
-			websocket = new WebSocket(baseUrl + request.coreType);
+			websocket = new WebSocket(url);
 			websocket.onopen = function (n) {
 				console.log("Opened connection to websocket");
 				var connectParam = JSON.stringify(createParam(0));

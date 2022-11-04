@@ -19,33 +19,37 @@ import (
 func main() {
 	appKey := "Insert your appKey here"
 	secretKey := "Insert your secretKey here"
+	
+	baseURL := "https://api.speechsuper.com/"
 
-	coreType := "word.eval"
-	url := "https://api.speechsuper.com/" + coreType
+	coreType := "word.eval" // Change the coreType according to your needs.
+	refText := "supermarket" // Change the reference text according to your needs.
+	audioPath := "supermarket.wav" // Change the audio path corresponding to the reference text.
+	audioType := "wav" // Change the audio type corresponding to the audio file.
+	audioSampleRate := "16000"
+	userId := "guest" // Required and customizable. This value is required when generating startSig
+
+	url := baseURL + coreType
 	method := "POST"
-
 	payload := &bytes.Buffer{}
 	writer := multipart.NewWriter(payload)
 
 	timestamp := strconv.FormatInt(time.Now().Unix(), 10)
-	userId := "guest" //Required and customizable. This value is required when generating startsig
+	
 	connectData := []byte(appKey + timestamp + secretKey)
 	startData := []byte(appKey + timestamp + userId + secretKey)
 	connectSig := fmt.Sprintf("%x", sha1.Sum(connectData))
 	startSig := fmt.Sprintf("%x", sha1.Sum(startData))
-	refText := "supermarket"
-	audioPath := "supermarket.wav"
-	audioType := "wav"
-	audioSampleRate := "16000"
+	
 
-	//request param
-	requestParam := `{"connect": {"cmd": "connect", "param": {"sdk": {"version": 16777472, "source": 9, "protocol": 2}, "app":{"applicationId":"` + appKey + `","sig":"` + connectSig + `","timestamp":"` + timestamp + `"}}}, "start": {"cmd": "start", "param": {"app":{"applicationId":"` + appKey + `","sig":"` + startSig + `","timestamp":"` + timestamp + `","userId":"` + userId + `"}, "audio": {"audioType": "` + audioType + `", "channel": 1, "sampleBytes": 2, "sampleRate":"` + audioSampleRate + `"}, "request": {"coreType": "` + coreType + `", "refText":"` + refText + `", "tokenId": "` + uuid.New().String() + `"}}}}`
+	// request param
+	requestParam := `{"connect": {"cmd": "connect", "param": {"sdk": {"version": 16777472, "source": 9, "protocol": 2}, "app":{"applicationId":"` + appKey + `","sig":"` + connectSig + `","timestamp":"` + timestamp + `"}}}, "start": {"cmd": "start", "param": {"app":{"applicationId":"` + appKey + `","sig":"` + startSig + `","timestamp":"` + timestamp + `","userId":"` + userId + `"}, "audio": {"audioType": "` + audioType + `", "channel": 1, "sampleBytes": 2, "sampleRate":` + audioSampleRate + `}, "request": {"coreType": "` + coreType + `", "refText":"` + refText + `", "tokenId": "` + uuid.New().String() + `"}}}}`
 	err := writer.WriteField("text", requestParam)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	//send audio
+	// send audio
 	part2, err := writer.CreateFormFile("audio", audioPath)
 	if err != nil {
 		log.Fatal(err)
@@ -73,7 +77,7 @@ func main() {
 	}
 
 	req.Header.Set("Content-Type", writer.FormDataContentType())
-	req.Header.Set("Request-Index", "0") //Request-Index is always 0
+	req.Header.Set("Request-Index", "0") // Request-Index is always 0
 
 	res, err := client.Do(req)
 	if err != nil {

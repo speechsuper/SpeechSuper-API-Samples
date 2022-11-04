@@ -3,10 +3,11 @@ $appKey = "Insert your appKey here";
 $secretKey = "Insert your secretKey here";
 
 $baseUrl = "https://api.speechsuper.com/";
-$coreType = "word.eval";
-$refText = "supermarket";
-$audioPath = "supermarket.wav";
-$audioType = "wav";
+
+$coreType = "word.eval"; // Change the coreType according to your needs.
+$refText = "supermarket"; // Change the reference text according to your needs.
+$audioPath = "supermarket.wav"; // Change the audio path corresponding to the reference text.
+$audioType = "wav"; // Change the audio type corresponding to the audio file.
 $audioSampleRate = 16000;
 $userId = "guest";
 $ts = strtotime('now');
@@ -14,6 +15,8 @@ $conSig = sha1($appKey.$ts.$secretKey,false);
 $startSig = sha1($appKey.$ts.$userId.$secretKey, false);
 $ch = curl_init();
 $headers = array('Request-Index:0');//Request-Index is always 0
+
+$url = $baseUrl.$coreType;
 
 //request param
 $strData = array('text'=>
@@ -59,7 +62,7 @@ $strData = array('text'=>
                     } 
                     ',
                     'audio'=>file_get_contents(ltrim($audioPath)));
-curl_setopt($ch, CURLOPT_URL, $baseUrl.$coreType);
+curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);

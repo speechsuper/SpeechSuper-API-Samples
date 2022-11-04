@@ -161,13 +161,15 @@ namespace csharp_websocket_sample
 
         static void Main(string[] args)
         {
-            string audioPath = "supermarket.wav";
-            string audioType = "wav";
+            string coreType = "word.eval"; // Change the coreType according to your needs.
+            string refText = "supermarket" // Change the reference text according to your needs.
+            string audioPath = "supermarket.wav"; // Change the audio path corresponding to the reference text.
+            string audioType = "wav"; // Change the audio type corresponding to the audio file.
             int sampleRate = 16000;
-            string coreType = "word.eval";
+            
             Dictionary<string, object> requests = new Dictionary<string, object>();
             requests.Add("coreType", coreType);
-            requests.Add("refText", "supermarket");
+            requests.Add("refText", refText);
             WebsocketAPIAsync(audioPath, audioType, sampleRate, coreType, requests);
             Console.ReadLine();
         }

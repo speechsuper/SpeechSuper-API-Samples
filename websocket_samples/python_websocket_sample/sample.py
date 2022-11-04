@@ -7,12 +7,14 @@ import websockets
 
 #global variable
 baseUrl = "wss://api.speechsuper.com/"
+
 appKey = "Insert your appKey here"
 secretKey = "Insert your secretKey here"
-coreType = "word.eval"
-refText = "supermarket"
-audioPath = "supermarket.wav"
-audioType = "wav"
+
+coreType = "word.eval" # Change the coreType according to your needs.
+refText = "supermarket" # Change the reference text according to your needs.
+audioPath = "supermarket.wav" # Change the audio path corresponding to the reference text.
+audioType = "wav" # Change the audio type corresponding to the audio file.
 audioSampleRate = 16000
 
 # Send authentication
