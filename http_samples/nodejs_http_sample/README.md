@@ -10,5 +10,6 @@
 # Command lines
 - Run the following command: 
     ```
+    npm install
     npm run start
     ```
