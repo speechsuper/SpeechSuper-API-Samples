@@ -29,3 +29,7 @@ __pycache__/
 **/java*/**/target
 **/java*/**/.classpath
 **/java*/**/.project
+
+# node
+**/yarn.lock
+**/node_modules

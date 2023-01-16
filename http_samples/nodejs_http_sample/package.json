@@ -1,0 +1,13 @@
+{
+    "name": "nodejs_http_sample",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "dependencies": {
+        "crypto": "^1.0.1",
+        "form-data": "^4.0.0"
+    },
+    "scripts": {
+        "start": "node main.js"
+    }
+}
