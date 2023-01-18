@@ -1,8 +1,8 @@
 # Quick Start
 
-1. Install Golang
-2. Modify the appKey in sample.go
-3. Modify the secretKey in sample.go
+1. Install Flutter
+2. Modify the appKey in lib/main.dart
+3. Modify the secretKey in lib/main.dart
 4. Change the coreType according to your needs.
 5. Change the reference text according to your needs.
 6. Change the audio path corresponding to the reference text.
