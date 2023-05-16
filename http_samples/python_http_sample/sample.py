@@ -70,4 +70,4 @@ data={'text':datas}
 headers={"Request-Index":"0"}
 files={"audio":open(audioPath,'rb')}
 res=requests.post(url, data=data, headers=headers, files=files)
-print(res.text.encode('gbk', 'ignore'))
+print(res.text.encode('utf-8', 'ignore').decode('utf-8'))
