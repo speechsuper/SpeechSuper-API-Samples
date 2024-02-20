@@ -1,28 +1,33 @@
 # SpeechSuper API
 
+Enhance your language learning with our Pronunciation Assessment API. Tailored to support language learners, our API evaluates pronunciation by analyzing audio files and text strings, providing comprehensive metrics for speech quality and fluency. 
+
 ## Pronunciation Assessment API (Scripted)
 
-### 🌟 Basics
-The Pronunciation Assessment API (Scripted) provided by SpeechSuper offers a comprehensive analysis of learners' audio recordings, providing valuable insights in the following areas:
+### 🌟 Basic Features
+The Pronunciation Assessment API (scripted) provided by SpeechSuper offers a comprehensive analysis of learners' audio recordings, providing valuable insights in the following areas:
 
+- Accurate assessment at phoneme, syllable, word, and sentence levels, aligning with native English speech patterns.
+- Fluency metrics, including words correct per minute and pause count, alongside IELTS/PTE score estimation.
+
+Basic Features:
 - Pronunciation score (of phonemes, words, sentences)
 - Fluency score
 - Completeness score
 - Rhythm score or speed
 
-### 🪐 Pro Features
+### 🪐 Highlight Features
 
-In addition to the basics, the Pro features offer advanced capabilities, including:
-  
+Explore advanced capabilities with SpeechSuper's Pronunciation Assessment API, complementing its fundamental features. Unleash the power of:
+
 - Syllable stress analysis
 - Liaison detection
 - Loss of plosion identification
-- Rising/falling tone analysis at the end of a sentence
-- Instant feedback on sentence level
-- Phoneme-level mispronunciation detection (insertion, deletion, substitution)
+- Rising/falling tone analysis for sentence endings
+- Real-time feedback at the sentence level
+- Detection of phoneme-level mispronunciations (insertion, deletion, substitution)
 
-With SpeechSuper's Pronunciation Assessment API, you gain access to powerful tools to assess and enhance your pronunciation skills in a scripted context.
-
+With SpeechSuper's Pronunciation Assessment API, you access robust tools to evaluate and refine your pronunciation skills within structured contexts. Elevate your language proficiency with precise analysis and instant feedback mechanisms.
   
 <details>
 <summary>Spoken languages covered</summary>
