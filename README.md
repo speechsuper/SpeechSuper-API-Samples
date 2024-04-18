@@ -96,7 +96,7 @@ secretKey = "Insert your secretKey here"
 
 4. **Change the inputs according to your needs.**
 ```
-coreType = "sent.eval" // sentence evaluation
+coreType = "sent.eval.promax" // sentence evaluation
 refText = "The successful warrior is the average man with laser-like focus." // reference text
 audioPath = "The audio path of the spoken sentence." 
 audioType = "wav"
