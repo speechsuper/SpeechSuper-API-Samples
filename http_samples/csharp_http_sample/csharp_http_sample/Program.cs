@@ -188,7 +188,7 @@ namespace csharp_http_sample
         static void Main(string[] args)
         {
             int httpTimeout = 50000; //50s
-            string coreType = "word.eval"; // Change the coreType according to your needs.
+            string coreType = "word.eval.promax"; // Change the coreType according to your needs.
             string refText = "supermarket"; // Change the reference text according to your needs.
             string audioPath = "supermarket.wav"; // Change the audio path corresponding to the reference text.
             string audioFormat = "wav"; // Change the audio type corresponding to the audio file.

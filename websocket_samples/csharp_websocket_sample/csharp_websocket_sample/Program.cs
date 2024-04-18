@@ -161,7 +161,7 @@ namespace csharp_websocket_sample
 
         static void Main(string[] args)
         {
-            string coreType = "word.eval"; // Change the coreType according to your needs.
+            string coreType = "word.eval.promax"; // Change the coreType according to your needs.
             string refText = "supermarket" // Change the reference text according to your needs.
             string audioPath = "supermarket.wav"; // Change the audio path corresponding to the reference text.
             string audioType = "wav"; // Change the audio type corresponding to the audio file.

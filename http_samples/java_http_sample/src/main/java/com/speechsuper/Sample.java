@@ -138,7 +138,7 @@ public class Sample {
     }
 
     public static void main(String[] args) {
-        String coreType = "word.eval"; // Change the coreType according to your needs.
+        String coreType = "word.eval.promax"; // Change the coreType according to your needs.
         String refText = "supermarket"; // Change the reference text according to your needs.
         String audioPath = "supermarket.wav"; // Change the audio path corresponding to the reference text.
         String audioType = "wav"; // Change the audio type corresponding to the audio file.

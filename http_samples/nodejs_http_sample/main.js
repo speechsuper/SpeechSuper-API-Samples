@@ -9,7 +9,7 @@ const userId = "uid";
 
 const baseHOST = "api.speechsuper.com";
 
-const coreType = "word.eval"; // Change the coreType according to your needs.
+const coreType = "word.eval.promax"; // Change the coreType according to your needs.
 const refText = "supermarket"; // Change the reference text according to your needs.
 const audioPath = "supermarket.wav"; // Change the audio path corresponding to the reference text.
 const audioType = "wav"; // Change the audio type corresponding to the audio file.

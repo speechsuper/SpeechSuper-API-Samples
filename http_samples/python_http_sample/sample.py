@@ -11,7 +11,7 @@ baseURL = "https://api.speechsuper.com/"
 
 timestamp = str(int(time.time()))
 
-coreType = "word.eval" # Change the coreType according to your needs.
+coreType = "word.eval.promax" # Change the coreType according to your needs.
 refText = "supermarket" # Change the reference text according to your needs.
 audioPath = "supermarket.wav" # Change the audio path corresponding to the reference text.
 audioType = "wav" # Change the audio type corresponding to the audio file.

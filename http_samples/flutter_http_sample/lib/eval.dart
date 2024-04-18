@@ -19,7 +19,7 @@ class _EvalScreenState extends State<EvalScreen> {
   final String userId = "uid";
   final String baseHOST = "api.speechsuper.com";
 
-  final String coreType = "word.eval"; // Change the coreType according to your needs.
+  final String coreType = "word.eval.promax"; // Change the coreType according to your needs.
   final refText = "supermarket"; // Change the reference text according to your needs.
   final audioPath = "assets/supermarket.wav"; // Change the audio path corresponding to the reference text.
   final audioType = "wav"; // Change the audio type corresponding to the audio file.
