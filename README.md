@@ -167,13 +167,30 @@ secretKey = "Insert your secretKey here"
 4. **Change the inputs according to your needs.**
 
 ```
-coreType = "speak.eval.pro"  # Selects English spontaneous speech assessment
-test_type = "ielts"  # Specifies the evaluation standard for English
-question_prompt = "What's your favorite food?"  # Specify the question prompt if applicable
+# CoreType for English spontaneous speech assessment
+coreType = "speak.eval.pro"
+
+# Test type, currently supporting only IELTS speaking assessment
+test_type = "ielts"
+
+# Question prompt used to score relevance of the response and penalize irrelevant responses
+question_prompt = "What's your favorite food?"
+
+# Model for transcription accuracy; use "non_native" for non-native speakers, "native" otherwise
+model = "non_native"
+
+# Penalize scores for off-topic responses (1 to penalize, 0 otherwise)
+penalize_offtopic = 1
+
+# Path to the audio file of the speech
 audioPath = "The audio path of the speech."
+
+# Type of the audio file (e.g., "wav")
 audioType = "wav"
 
 ```
+
+
 > **Notes on Audio:** SpeechSuper supports most audio formats, such as wav, mp3, opus, ogg, and amr.
 > 
 > To optimize file size and enhance performance, we strongly recommend recording your audio at the following settings:
